@@ -169,16 +169,23 @@
     progressBar.parentElement instanceof HTMLElement &&
     window.getComputedStyle(progressBar.parentElement).display !== 'none'
   ) {
+    let progressRaf = 0;
+
     const updateProgress = () => {
+      progressRaf = 0;
       const scrollTop = window.scrollY;
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       const progress = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
       progressBar.style.width = `${Math.min(100, Math.max(0, progress)).toFixed(2)}%`;
     };
 
+    const scheduleProgress = () => {
+      if (!progressRaf) progressRaf = window.requestAnimationFrame(updateProgress);
+    };
+
     updateProgress();
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', updateProgress);
+    window.addEventListener('scroll', scheduleProgress, { passive: true });
+    window.addEventListener('resize', scheduleProgress);
   }
 
   const cursorDrop = document.querySelector('.cursor-drop');
