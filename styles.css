@@ -22,6 +22,13 @@ body::before{
   content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:var(--bg-image, url("background.jpg"));
   background-size:cover;background-position:center top;background-repeat:no-repeat;
+  /* Promote to its own compositing layer. Without this iOS Safari re-rasterises
+     the layer against the document during momentum scroll, which makes a fixed
+     background drift upward as you scroll instead of staying put. */
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
 }
 
 /* Keep anchors visible under sticky header */
@@ -796,9 +803,6 @@ main,.hero,.section{position:relative;z-index:1}
   /* Phones keep the same pinned background layer as desktop. Painting it on
      <body> instead made it scroll away with the page, because a body
      background is sized to the whole document, not the viewport. */
-  body::before{
-    background-position:center center;
-  }
 
   /* The nav keeps its frosted pill. Everything else drops the blur - stacking
      several backdrop-filters is what makes phones stutter. */
@@ -814,7 +818,13 @@ main,.hero,.section{position:relative;z-index:1}
 
   .nav{
     background:rgba(255,255,255,0.10);
-    backdrop-filter:blur(18px) saturate(160%);
-    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(20px) saturate(170%);
+    backdrop-filter:blur(20px) saturate(170%);
+  }
+
+  /* If the browser cannot blur, tint the pill instead so it still reads as
+     glass rather than a flat outline over the hero. */
+  @supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+    .nav{background:rgba(16,24,40,0.72)}
   }
 }
