@@ -793,18 +793,15 @@ h3{font-size:1.15rem}
 main,.hero,.section{position:relative;z-index:1}
 
 @media (max-width:900px){
-  body{
-    background-image:var(--bg-image, url("background.jpg"));
-    background-size:cover;
-    background-position:center top;
-    background-repeat:no-repeat;
-  }
-
+  /* Phones keep the same pinned background layer as desktop. Painting it on
+     <body> instead made it scroll away with the page, because a body
+     background is sized to the whole document, not the viewport. */
   body::before{
-    display:none;
+    background-position:center center;
   }
 
-  .nav,
+  /* The nav keeps its frosted pill. Everything else drops the blur - stacking
+     several backdrop-filters is what makes phones stutter. */
   .hero-inner,
   #services .services-panel,
   .elevate-inner,
@@ -813,5 +810,11 @@ main,.hero,.section{position:relative;z-index:1}
   .notification-toast{
     backdrop-filter:none!important;
     -webkit-backdrop-filter:none!important;
+  }
+
+  .nav{
+    background:rgba(255,255,255,0.10);
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
   }
 }
