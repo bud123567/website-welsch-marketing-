@@ -804,9 +804,9 @@ main,.hero,.section{position:relative;z-index:1}
      <body> instead made it scroll away with the page, because a body
      background is sized to the whole document, not the viewport. */
 
-  /* The nav keeps its frosted pill. Everything else drops the blur - stacking
-     several backdrop-filters is what makes phones stutter. */
-  .hero-inner,
+  /* The nav and the hero box keep their frosted glass - they are what you see
+     above the fold. Everything below drops the blur, since stacking several
+     backdrop-filters down the page is what makes phones stutter. */
   #services .services-panel,
   .elevate-inner,
   .projects-header__card,
@@ -814,6 +814,14 @@ main,.hero,.section{position:relative;z-index:1}
   .notification-toast{
     backdrop-filter:none!important;
     -webkit-backdrop-filter:none!important;
+  }
+
+  /* Cheaper radius than the 34px desktop blur - a wide blur over a box this
+     large is the expensive part, not the blur itself. */
+  .hero-inner{
+    background:rgba(255,255,255,0.10);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    backdrop-filter:blur(18px) saturate(160%);
   }
 
   .nav{
@@ -826,5 +834,6 @@ main,.hero,.section{position:relative;z-index:1}
      glass rather than a flat outline over the hero. */
   @supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
     .nav{background:rgba(16,24,40,0.72)}
+    .hero-inner{background:rgba(16,24,40,0.72)}
   }
 }
