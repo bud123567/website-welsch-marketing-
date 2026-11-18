@@ -3,6 +3,19 @@
 
   const body = document.body;
 
+  const offerBanner = document.querySelector('.offer-banner');
+  const offerPause = document.querySelector('.offer-banner__pause');
+  if (offerBanner && offerPause) {
+    offerPause.addEventListener('click', () => {
+      const paused = offerBanner.classList.toggle('is-paused');
+      offerPause.setAttribute('aria-pressed', String(paused));
+      offerPause.setAttribute('aria-label', paused ? 'Resume offer animation' : 'Pause offer animation');
+      offerPause.firstElementChild.textContent = paused ? '▶' : 'Ⅱ';
+    });
+  }
+
+
+
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 

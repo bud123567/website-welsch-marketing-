@@ -856,16 +856,30 @@ a:focus-visible,button:focus-visible{outline:2px solid #9ad7ff;outline-offset:4p
   .cursor-drop{display:none!important}
 }
 
-/* Personal contact uses the existing button and glass-panel styling. */
-.personal-contact{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:.5rem 0}
-.personal-contact p{margin:.65rem 0 0;color:#cbd5ec;font-size:.95rem}
-.personal-contact__save{display:inline-flex;align-items:center;min-height:44px;color:#fff;text-decoration:underline;text-underline-offset:3px}
 
-/* A restrained offer panel in the existing blue glass visual style. */
-.hosting-offer{display:grid;gap:.35rem;max-width:620px;padding:1rem 1.25rem;margin:.25rem 0 .5rem;border:1px solid rgba(154,215,255,.45);border-radius:14px;background:rgba(7,12,22,.65);color:#e6edf7}
-.hosting-offer strong{font-size:1.2rem;color:#fff}
-.hosting-offer span{font-size:.95rem;line-height:1.5}
-
-.hosting-offer .hosting-offer__deadline{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9ad7ff}
-.hosting-offer strong{font-size:1.4rem}
-.hosting-offer__claim{justify-self:center;margin-top:.5rem}
+/* One attention-grabbing announcement above the original glass navigation. */
+:root{--offer-height:52px}
+.offer-banner{position:fixed;inset:0 0 auto;height:var(--offer-height);z-index:1100;display:flex;align-items:stretch;background:linear-gradient(100deg,#0079fa,#00c6ff 55%,#0079fa);color:#031327;border-bottom:1px solid #8be5ff;box-shadow:0 3px 22px rgba(0,166,255,.55);animation:offer-glow 3s ease-in-out infinite}
+.offer-banner__link{display:flex;align-items:center;flex:1;min-width:0;overflow:hidden;color:#031327}
+.offer-banner__track{display:flex;width:max-content;animation:offer-scroll 26s linear infinite;will-change:transform}
+.offer-banner__group{display:flex;flex-shrink:0;align-items:center;gap:30px;padding-right:30px;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.07em}
+.offer-banner__group strong{font-size:15px;font-weight:800}
+.offer-banner__badge{background:#06182f;color:#fff;border-radius:999px;padding:5px 12px;text-transform:uppercase;font-size:10px;letter-spacing:.08em}
+.offer-banner__action{text-decoration:underline;text-underline-offset:4px}
+.offer-banner__pause{flex:0 0 52px;display:grid;place-items:center;border:0;border-left:1px solid rgba(3,19,39,.25);background:rgba(255,255,255,.2);color:#031327;font-size:20px;cursor:pointer}
+.offer-banner:hover,.offer-banner:focus-within,.offer-banner.is-paused{animation-play-state:paused}
+.offer-banner:hover .offer-banner__track,.offer-banner:focus-within .offer-banner__track,.offer-banner.is-paused .offer-banner__track{animation-play-state:paused}
+.offer-banner a:focus-visible,.offer-banner button:focus-visible{outline:3px solid #031327;outline-offset:-4px}
+.site-header{top:var(--offer-height)}
+.hero{margin-top:var(--offer-height)}
+.hero,.section{scroll-margin-top:calc(120px + var(--offer-height))}
+@keyframes offer-scroll{to{transform:translateX(-50%)}}
+@keyframes offer-glow{50%{box-shadow:0 4px 28px rgba(0,198,255,.85)}}
+@media(prefers-reduced-motion:reduce){
+  :root{--offer-height:76px}
+  .offer-banner,.offer-banner__track{animation:none!important}
+  .offer-banner__track{width:100%;transform:none}
+  .offer-banner__group{flex:1;justify-content:center;gap:3px 12px;flex-wrap:wrap;white-space:normal;padding:5px 10px;font-size:10px;letter-spacing:.02em;text-align:center}
+  .offer-banner__group strong{font-size:12px}
+  .offer-banner__group[aria-hidden="true"],.offer-banner__pause{display:none}
+}
