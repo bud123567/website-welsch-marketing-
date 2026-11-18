@@ -836,7 +836,7 @@ main,.hero,.section{position:relative;z-index:1}
 }
 
 /* Restrained inquiry improvements; preserve the original glass-and-photo design. */
-.hero{min-height:0;padding-bottom:2rem}
+.hero{min-height:calc(100svh - var(--offer-height,52px) - 32px);padding-bottom:2rem}
 .typeform-section{padding-top:1rem;content-visibility:visible}
 .typeform-card{background:rgba(12,16,24,.88);border-color:rgba(255,255,255,.3)}
 .typeform-card .lead{color:#cbd5ec;margin-top:.65rem}
@@ -881,3 +881,13 @@ a:focus-visible,button:focus-visible{outline:2px solid #9ad7ff;outline-offset:4p
   .offer-banner__group{flex:1;justify-content:center;gap:3px 12px;flex-wrap:wrap;white-space:normal;padding:5px 10px;font-size:10px;letter-spacing:.02em;text-align:center}
   .offer-banner__group strong{font-size:12px}
   .offer-banner__group[aria-hidden="true"],}
+
+/* Let the hero own the first screen; reveal the next glass panel on scroll. */
+.typeform-card{transition:background .45s ease,border-color .45s ease,box-shadow .45s ease}
+.typeform-card > *{transition:filter .45s ease,opacity .45s ease}
+.typeform-section.is-frosted:not(:focus-within) .typeform-card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22);box-shadow:0 16px 50px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.2);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.typeform-section.is-frosted:not(:focus-within) .typeform-card > *{filter:blur(9px);opacity:.18}
+@media(prefers-reduced-motion:reduce){
+  .typeform-card,.typeform-card > *{transition:none}
+  .typeform-section.is-frosted .typeform-card > *{filter:none;opacity:1}
+}

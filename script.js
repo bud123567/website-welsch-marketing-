@@ -255,6 +255,27 @@
 
   const typeformSection = document.getElementById('start-project');
   const typeformTarget = document.querySelector('.typeform-embed [data-tf-live]');
+  if (typeformSection) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let frostFrame = 0;
+    const updateFrost = () => {
+      frostFrame = 0;
+      const shouldFrost = !reducedMotion.matches &&
+        !typeformSection.contains(document.activeElement) &&
+        typeformSection.getBoundingClientRect().top > window.innerHeight * .78;
+      typeformSection.classList.toggle('is-frosted', shouldFrost);
+    };
+    const scheduleFrost = () => {
+      if (!frostFrame) frostFrame = window.requestAnimationFrame(updateFrost);
+    };
+    updateFrost();
+    window.addEventListener('scroll', scheduleFrost, { passive: true });
+    window.addEventListener('resize', scheduleFrost);
+    typeformSection.addEventListener('focusin', updateFrost);
+    typeformSection.addEventListener('focusout', scheduleFrost);
+    reducedMotion.addEventListener('change', updateFrost);
+  }
+
   if (typeformSection && typeformTarget) {
     let typeformRequested = false;
 
