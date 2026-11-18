@@ -6,7 +6,8 @@
 }
 
 *{box-sizing:border-box}
-html,body{height:100%}
+html{min-height:100%}
+body{min-height:100vh;isolation:isolate}
 html{scroll-behavior:smooth}
 
 body{
@@ -17,14 +18,12 @@ body{
 body.lightbox-open,
 body.embed-open{overflow:hidden}
 
-/* 🔵 ONE SHARED BACKGROUND FOR NAV + HERO  */
-body::before{
-  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:var(--bg-image, url("background.jpg"));
-  background-size:cover;background-position:center top;background-repeat:no-repeat;
-  /* Promote to its own compositing layer. Without this iOS Safari re-rasterises
-     the layer against the document during momentum scroll, which makes a fixed
-     background drift upward as you scroll instead of staying put. */
+/* One viewport-fixed image behind the entire document, never a section image.
+   The large viewport height stays stable as mobile browser chrome collapses. */
+.site-backdrop{
+  position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;
+  z-index:-1;pointer-events:none;
+  background:#000 url("background.jpg") center top / cover no-repeat;
   transform:translateZ(0);
   -webkit-transform:translateZ(0);
   backface-visibility:hidden;
@@ -800,9 +799,7 @@ h3{font-size:1.15rem}
 main,.hero,.section{position:relative;z-index:1}
 
 @media (max-width:900px){
-  /* Phones keep the same pinned background layer as desktop. Painting it on
-     <body> instead made it scroll away with the page, because a body
-     background is sized to the whole document, not the viewport. */
+  /* Phones share the same viewport-fixed .site-backdrop as desktop. */
 
   /* The nav and the hero box keep their frosted glass - they are what you see
      above the fold. Everything below drops the blur, since stacking several
