@@ -855,3 +855,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #9ad7ff;outline-offset:4p
   *,*::before,*::after{transition:none!important;animation:none!important}
   .cursor-drop{display:none!important}
 }
+
+/* Personal contact uses the existing button and glass-panel styling. */
+.personal-contact{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:.5rem 0}
+.personal-contact p{margin:.65rem 0 0;color:#cbd5ec;font-size:.95rem}
+.personal-contact__save{display:inline-flex;align-items:center;min-height:44px;color:#fff;text-decoration:underline;text-underline-offset:3px}
