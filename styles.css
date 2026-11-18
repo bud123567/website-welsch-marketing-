@@ -866,10 +866,9 @@ a:focus-visible,button:focus-visible{outline:2px solid #9ad7ff;outline-offset:4p
 .offer-banner__group strong{font-size:15px;font-weight:800}
 .offer-banner__badge{background:#06182f;color:#fff;border-radius:999px;padding:5px 12px;text-transform:uppercase;font-size:10px;letter-spacing:.08em}
 .offer-banner__action{text-decoration:underline;text-underline-offset:4px}
-.offer-banner__pause{flex:0 0 52px;display:grid;place-items:center;border:0;border-left:1px solid rgba(3,19,39,.25);background:rgba(255,255,255,.2);color:#031327;font-size:20px;cursor:pointer}
-.offer-banner:hover,.offer-banner:focus-within,.offer-banner.is-paused{animation-play-state:paused}
-.offer-banner:hover .offer-banner__track,.offer-banner:focus-within .offer-banner__track,.offer-banner.is-paused .offer-banner__track{animation-play-state:paused}
-.offer-banner a:focus-visible,.offer-banner button:focus-visible{outline:3px solid #031327;outline-offset:-4px}
+.offer-banner:hover,.offer-banner:focus-within{animation-play-state:paused}
+.offer-banner:hover .offer-banner__track,.offer-banner:focus-within .offer-banner__track{animation-play-state:paused}
+.offer-banner a:focus-visible{outline:3px solid #031327;outline-offset:-4px}
 .site-header{top:var(--offer-height)}
 .hero{margin-top:var(--offer-height)}
 .hero,.section{scroll-margin-top:calc(120px + var(--offer-height))}
@@ -881,5 +880,4 @@ a:focus-visible,button:focus-visible{outline:2px solid #9ad7ff;outline-offset:4p
   .offer-banner__track{width:100%;transform:none}
   .offer-banner__group{flex:1;justify-content:center;gap:3px 12px;flex-wrap:wrap;white-space:normal;padding:5px 10px;font-size:10px;letter-spacing:.02em;text-align:center}
   .offer-banner__group strong{font-size:12px}
-  .offer-banner__group[aria-hidden="true"],.offer-banner__pause{display:none}
-}
+  .offer-banner__group[aria-hidden="true"],}
