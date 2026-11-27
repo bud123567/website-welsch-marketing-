@@ -891,3 +891,9 @@ a:focus-visible,button:focus-visible{outline:2px solid #9ad7ff;outline-offset:4p
   .typeform-card,.typeform-card > *{transition:none}
   .typeform-section.is-frosted .typeform-card > *{filter:none;opacity:1}
 }
+
+/* Dedicated inquiry page: shared brand shell, with the form clear on arrival. */
+.project-page main{padding-top:calc(var(--offer-height) + 120px)}
+.project-page .typeform-section{padding-top:1rem}
+.project-page .typeform-card h1{margin:0}
+.project-page .nav-menu a[aria-current="page"]{border-color:var(--text)}
