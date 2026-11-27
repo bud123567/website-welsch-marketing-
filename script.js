@@ -255,7 +255,7 @@
 
   const typeformSection = document.getElementById('start-project');
   const typeformTarget = document.querySelector('.typeform-embed [data-tf-live]');
-  if (typeformSection) {
+  if (typeformSection && !body.classList.contains('project-page')) {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let frostFrame = 0;
     const updateFrost = () => {
